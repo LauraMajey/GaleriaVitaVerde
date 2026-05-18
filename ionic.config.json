@@ -1,0 +1,7 @@
+{
+  "name": "GaleriaVitaVerde",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
