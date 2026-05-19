@@ -1,17 +1,48 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+  <ion-toolbar color="success">
+    <ion-title>Autenticación - VitaVerde</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <div *ngIf="!tokenActivo" class="login-container">
+    <div class="ion-text-center ion-padding-vertical">
+      <h3>Bienvenido a VitaVerde</h3>
+      <p>Inicia sesión para consumir los servicios seguros de la API</p>
+    </div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-item lines="full">
+      <ion-label position="floating">Usuario / Correo</ion-label>
+      <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full" class="ion-margin-top">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" color="success" class="ion-margin-top" (click)="onLogin()">
+      <ion-icon slot="start" name="log-in-outline"></ion-icon>
+      Autenticar con JWT
+    </ion-button>
+  </div>
+
+  <div *ngIf="tokenActivo" class="session-container ion-text-center ion-padding">
+    <ion-icon name="checkmark-circle" color="success" style="font-size: 64px;"></ion-icon>
+    <h2>Conexión Segura Activa</h2>
+    <p>El token JWT se encuentra inyectado en las cabeceras HTTP mediante el Interceptor.</p>
+    
+    <ion-card color="light" class="ion-padding">
+      <p style="font-family: monospace; font-size: 11px; word-wrap: break-word;">
+        <strong>JWT Local:</strong> {{ tokenActivo }}
+      </p>
+    </ion-card>
+
+    <ion-button expand="block" color="danger" class="ion-margin-top" (click)="onLogout()">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      Cerrar Sesión (Eliminar Token)
+    </ion-button>
+  </div>
+
 </ion-content>
