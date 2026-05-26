@@ -5,13 +5,12 @@ import { PhotoService } from '../services/photo.service';
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  standalone: false 
+  standalone: false
 })
 export class Tab2Page implements OnInit {
-
   constructor(public photoService: PhotoService) {}
 
   async ngOnInit() {
-    await this.photoService.loadSavedPhotos();
+    await this.photoService.loadSavedPhotos(); // Inicializa las fotos guardadas en el storage
   }
 }

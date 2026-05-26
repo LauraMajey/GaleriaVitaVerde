@@ -1,0 +1,9 @@
+.splash-content { --background: #fdfdfd; }
+.splash-container { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; }
+.splash-logo { font-size: 80px; color: #15BE77; }
+.gradient-text {
+  font-size: 42px; font-weight: 800;
+  background: linear-gradient(to bottom, #53E88B 0%, #15BE77 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.splash-subtitle { color: #7a7a7a; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; }

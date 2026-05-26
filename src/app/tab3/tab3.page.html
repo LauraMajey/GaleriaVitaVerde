@@ -1,17 +1,48 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+  <ion-toolbar color="success">
+    <ion-title>Mi Carrito de Compras</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="cart-container">
+    
+    <div *ngIf="carrito.length === 0" class="ion-text-center empty-cart ion-padding">
+      <ion-icon name="basket-outline" class="big-icon"></ion-icon>
+      <h2>Tu carrito está vacío</h2>
+      <p>Regresa al catálogo para agregar los mejores productos del campo.</p>
+    </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <div *ngIf="carrito.length > 0">
+      <ion-list lines="full" class="cart-list">
+        <ion-item *ngFor="let item of carrito">
+          <ion-label>
+            <h2 class="product-name">{{ item.nombre }}</h2>
+            <p class="product-details">
+              Cantidad: <strong>{{ item.cantidad }} u.</strong> — Subtotal: {{ (item.precio * (item.cantidad || 1)) | currency:'COP':'$':'1.0-0' }}
+            </p>
+          </ion-label>
+          <ion-button slot="end" fill="clear" color="danger" (click)="eliminarProducto(item.id)">
+            <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-item lines="none" class="total-item ion-margin-top">
+          <ion-label>
+            <h2 class="total-text">Total a Pagar:</h2>
+          </ion-label>
+          <ion-note slot="end" color="dark">
+            <h1 class="total-price"><strong>{{ obtenerTotal() | currency:'COP':'$':'1.0-0' }}</strong></h1>
+          </ion-note>
+        </ion-item>
+      </ion-list>
+
+      <div class="ion-padding-top">
+        <ion-button expand="block" class="pay-button" (click)="procesarPago()">
+          <ion-icon name="card-outline" slot="start"></ion-icon> PAGAR PEDIDO NOW
+        </ion-button>
+      </div>
+    </div>
+
+  </div>
 </ion-content>

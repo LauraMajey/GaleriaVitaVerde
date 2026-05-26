@@ -1,0 +1,115 @@
+.create-content { 
+  --background: #fafafa !important; 
+}
+
+.create-container { 
+  max-width: 500px; 
+  margin: 0 auto; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  height: 100%; 
+  padding: 10px; 
+}
+
+
+.brand-wrapper {
+  margin-bottom: 25px;
+  
+  .brand-logo {
+    width: 109px; 
+    height: 109px; 
+    margin: 0 auto 10px auto; 
+    
+    img { 
+      object-fit: contain; 
+      width: 100%; 
+      height: 100%; 
+    }
+  }
+  
+  .brand-title { 
+    font-size: 36px; 
+    font-weight: 800; 
+    color: #15BE77; 
+    margin: 0; 
+    letter-spacing: 0.5px; 
+  }
+  
+  .info-title { 
+    font-size: 20px; 
+    font-weight: 700; 
+    color: #222222; 
+    margin: 15px 0 2px 0; 
+  }
+  
+  .description-text { 
+    font-size: 14px; 
+    color: #7e7e7e; 
+    margin: 0; 
+  }
+}
+
+
+.form-wrapper {
+  width: 100%;
+  margin-bottom: 25px;
+  
+
+  .custom-input {
+    --background: #ffffff !important;
+    --color: #111111 !important;
+    --placeholder-color: #999999 !important;
+    --border-radius: 12px; 
+    margin-bottom: 12px;
+    border: 2px solid #53E88B;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+
+    ion-icon { 
+      color: #15BE77; 
+      font-size: 20px; 
+      margin-right: 10px; 
+    }
+    
+
+    ion-input::part(native) {
+      color: #111111 !important;
+      font-weight: 600 !important;
+      -webkit-text-fill-color: #111111 !important;
+    }
+
+   
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+      -webkit-text-fill-color: #111111 !important;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+}
+
+
+.btn-half {
+  --border-radius: 12px; 
+  height: 54px; 
+  font-weight: 700; 
+  font-size: 16px; 
+  margin: 0;
+  --background: linear-gradient(to right, #53E88B, #15BE77); 
+  color: white;
+  box-shadow: 0 4px 12px rgba(21, 190, 119, 0.2);
+}
+
+
+.clickable-text { 
+  cursor: pointer; 
+  font-size: 14px; 
+  color: #7e7e7e; 
+  margin-top: 20px; 
+  
+  strong { 
+    color: #15BE77; 
+    font-weight: 700;
+  } 
+}

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Preferences } from '@capacitor/preferences';
 
-// Interfaz para definir la estructura de cada foto de la galería
 export interface UserPhoto {
   filepath: string;
-  webviewPath: any;
+  webviewPath: string;
 }
 
 @Injectable({
@@ -17,28 +16,26 @@ export class PhotoService {
 
   constructor() {}
 
-  // Lógica principal para tomar la fotografía desde el emulador o dispositivo
   public async addNewToGallery() {
     const capturedPhoto = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Camera, // Invoca la cámara nativa del hardware
-      quality: 100
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Camera,
+      quality: 90
     });
 
-    // Guardar la foto en el arreglo en memoria
+    const base64Image = `data:image/jpeg;base64,${capturedPhoto.base64String}`;
+
     this.photos.unshift({
       filepath: 'foto_' + new Date().getTime() + '.jpg',
-      webviewPath: capturedPhoto.webPath
+      webviewPath: base64Image
     });
 
-    // Persistir la colección de fotos de manera local
-    Preferences.set({
+    await Preferences.set({
       key: this.PHOTO_STORAGE,
       value: JSON.stringify(this.photos)
     });
   }
 
-  // Carga la colección de fotos persistidas localmente al iniciar la vista
   public async loadSavedPhotos() {
     const { value } = await Preferences.get({ key: this.PHOTO_STORAGE });
     this.photos = value ? JSON.parse(value) : [];

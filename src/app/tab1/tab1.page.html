@@ -1,48 +1,61 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="success">
-    <ion-title>Autenticación - VitaVerde</ion-title>
+    <ion-title>Catálogo VitaVerde</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  
-  <div *ngIf="!tokenActivo" class="login-container">
-    <div class="ion-text-center ion-padding-vertical">
-      <h3>Bienvenido a VitaVerde</h3>
-      <p>Inicia sesión para consumir los servicios seguros de la API</p>
-    </div>
-
-    <ion-item lines="full">
-      <ion-label position="floating">Usuario / Correo</ion-label>
-      <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
-    </ion-item>
-
-    <ion-item lines="full" class="ion-margin-top">
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
-    </ion-item>
-
-    <ion-button expand="block" color="success" class="ion-margin-top" (click)="onLogin()">
-      <ion-icon slot="start" name="log-in-outline"></ion-icon>
-      Autenticar con JWT
-    </ion-button>
-  </div>
-
-  <div *ngIf="tokenActivo" class="session-container ion-text-center ion-padding">
-    <ion-icon name="checkmark-circle" color="success" style="font-size: 64px;"></ion-icon>
-    <h2>Conexión Segura Activa</h2>
-    <p>El token JWT se encuentra inyectado en las cabeceras HTTP mediante el Interceptor.</p>
+  <div *ngIf="tokenActivo">
     
-    <ion-card color="light" class="ion-padding">
-      <p style="font-family: monospace; font-size: 11px; word-wrap: break-word;">
-        <strong>JWT Local:</strong> {{ tokenActivo }}
-      </p>
-    </ion-card>
+    <ion-item lines="none" class="jwt-badge">
+      <ion-icon name="shield-checkmark-outline" color="success" slot="start"></ion-icon>
+      <ion-label>Sesión Segura Activada</ion-label>
+      <ion-button slot="end" fill="clear" color="danger" (click)="onLogout()">
+        <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+    
+    <h2 class="section-title">Nuestros Frescos</h2>
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" size-md="4" size-lg="3" *ngFor="let prod of productos">
+          <div class="product-card">
+            
+            <div class="image-container">
+              <span class="category-badge">{{ prod.categoria }}</span>
+              <img [src]="prod.imagen" alt="{{ prod.nombre }}" />
+            </div>
 
-    <ion-button expand="block" color="danger" class="ion-margin-top" (click)="onLogout()">
-      <ion-icon slot="start" name="log-out-outline"></ion-icon>
-      Cerrar Sesión (Eliminar Token)
-    </ion-button>
+            <div class="product-info-header">
+              <h3 class="product-title">{{ prod.nombre }}</h3>
+              <p class="product-price">{{ prod.precio | currency:'COP':'$':'1.0-0' }} / un</p>
+            </div>
+
+            <div class="product-action-content">
+              
+              <ion-button *ngIf="!obtenerCantidad(prod.id)" expand="block" class="add-button" (click)="cambiarCantidad(prod, 1)">
+                <ion-icon name="add-circle-outline" slot="start"></ion-icon> Añadir
+              </ion-button>
+
+              <div *ngIf="obtenerCantidad(prod.id) > 0" class="quantity-selector">
+                <ion-button fill="clear" color="success" (click)="cambiarCantidad(prod, -1)">
+                  <ion-icon name="remove-circle-outline"></ion-icon>
+                </ion-button>
+                
+                <span class="quantity-text">{{ obtenerCantidad(prod.id) }}</span>
+                
+                <ion-button fill="clear" color="success" (click)="cambiarCantidad(prod, 1)">
+                  <ion-icon name="add-circle-outline"></ion-icon>
+                </ion-button>
+              </div>
+
+            </div>
+
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
   </div>
-
 </ion-content>

@@ -8,7 +8,7 @@ import { Preferences } from '@capacitor/preferences';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiURL = 'https://api.vitaverde.com/auth'; // Endpoint ficticio de la API REST
+  private apiURL = 'https://api.vitaverde.com/auth'; 
   private currentUserSubject: BehaviorSubject<string | null>;
   public currentUser: Observable<string | null>;
 
@@ -18,7 +18,6 @@ export class AuthService {
     this.cargarToken();
   }
 
-  // Carga el token guardado localmente al iniciar la aplicación
   async cargarToken() {
     const { value } = await Preferences.get({ key: 'token_jwt' });
     if (value) {
@@ -26,7 +25,6 @@ export class AuthService {
     }
   }
 
-  // Realiza la petición POST de login y guarda el JWT retornado
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiURL}/login`, { username, password })
       .pipe(map(user => {
@@ -38,13 +36,11 @@ export class AuthService {
       }));
   }
 
-  // Método para cerrar sesión y limpiar el almacenamiento local
   async logout() {
     await Preferences.remove({ key: 'token_jwt' });
     this.currentUserSubject.next(null);
   }
 
-  // Obtener el token de manera síncrona
   getToken(): string | null {
     return this.currentUserSubject.value;
   }

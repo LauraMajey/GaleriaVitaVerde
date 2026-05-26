@@ -1,0 +1,130 @@
+.ion-padding {
+  --background: #fdfdfd !important;
+  background-color: #fdfdfd;
+}
+
+.cart-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+
+.empty-cart {
+  margin-top: 80px;
+  
+  .big-icon { 
+    font-size: 80px; 
+    color: #cbd5e1; 
+    margin-bottom: 15px;
+  }
+  
+  h2 { 
+    font-size: 20px;
+    font-weight: 800; 
+    color: #334155; 
+    margin: 0 0 8px 0;
+  }
+  
+  p { 
+    font-size: 14px;
+    color: #64748b; 
+    margin: 0;
+    padding: 0 20px;
+  }
+}
+
+
+.cart-list {
+  background: transparent !important;
+  padding: 0;
+  margin: 0;
+}
+
+
+.cart-item-card {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+  border-radius: 16px !important; // Curvatura idéntica al catálogo
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03) !important; // Sombra sutil de elevación
+  border: 1px solid rgba(0, 0, 0, 0.01);
+  margin-bottom: 12px;
+  --padding-start: 12px;
+  --inner-padding-end: 12px;
+
+
+  .product-name { 
+    font-size: 16px;
+    font-weight: 700; 
+    color: #1e293b; 
+    margin: 0 0 4px 0;
+  }
+
+
+  .product-details { 
+    font-size: 13px; 
+    color: #64748b;
+    margin: 0;
+
+    strong {
+      color: #334155;
+      font-weight: 700;
+    }
+  }
+
+
+  .item-subtotal {
+    font-size: 14px;
+    color: #15BE77;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+ 
+  .delete-button {
+    --color: #ff4d4d;
+    font-size: 18px;
+    margin: 0;
+  }
+}
+
+
+.total-card {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  border: 2px dashed rgba(21, 190, 119, 0.25);
+  margin-top: 20px;
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+
+  .total-text { 
+    font-size: 16px; 
+    font-weight: 700; 
+    color: #475569; 
+  }
+
+  .total-price { 
+    color: #15BE77; 
+    font-size: 22px; 
+    font-weight: 800;
+    margin: 0; 
+  }
+}
+
+
+.pay-button {
+  --border-radius: 14px !important;
+  height: 54px;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  --background: linear-gradient(to right, #53E88B, #15BE77) !important; 
+  color: white;
+  margin-top: 15px;
+  box-shadow: 0 4px 14px rgba(21, 190, 119, 0.25);
+  
+  ion-icon {
+    font-size: 18px;
+    margin-right: 6px;
+  }
+}
